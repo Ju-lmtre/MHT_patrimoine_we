@@ -1,0 +1,24 @@
+{
+  "name": "Vazco",
+  "short_name": "Vazco",
+  "description": "Découvrez l'histoire des chantiers navals de Nantes et les métiers avec Vazco.",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "background_color": "#F0EAE5",
+  "theme_color": "#52493E",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

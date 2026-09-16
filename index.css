@@ -1,0 +1,986 @@
+/* =========================================================
+   🎨 CHARGEMENT DES POLICES LOCALES
+   ========================================================= */
+@font-face {
+  font-family: 'Lilita One';
+  src: url('assets/fonts/Lilita_One/LilitaOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Jost';
+  src: url('assets/fonts/Jost/static/Jost-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Jost';
+  src: url('assets/fonts/Jost/static/Jost-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Jost';
+  src: url('assets/fonts/Jost/static/Jost-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Jost';
+  src: url('assets/fonts/Jost/static/Jost-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* =========================================================
+   🎨 DESIGN SYSTEM & VARIABLES
+   ========================================================= */
+:root {
+  --color-bg: #F0EAE5;
+  /* Beige sable doux */
+  --color-text: #52493E;
+  /* Marron chaud foncé */
+  --color-btn: #52493E;
+  /* Couleur des boutons */
+  --color-btn-hover: #3E372E;
+  /* Version survol */
+  --color-card-bg: rgba(240, 234, 229, 0.9);
+  /* Arrière-plan carte carrousel (opacité 90%) */
+
+  --font-title: 'Lilita One', sans-serif;
+  --font-body: 'Jost', sans-serif;
+
+  --transition-speed: 0.5s;
+  --transition-curve: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Marges réactives pour tablettes */
+  --slide-padding-x: clamp(40px, 6vw, 80px);
+  --slide-padding-y: clamp(15px, 3.5vh, 30px);
+}
+
+.welcome-slide,
+.intro-vazco-slide,
+.meta-vazco-slide,
+.closure-slide {
+  --slide-padding-x: 80px;
+}
+
+.welcome-slide .home-title,
+.welcome-slide .story-paragraph,
+.intro-vazco-slide .story-title,
+.intro-vazco-slide .story-paragraph,
+.closure-slide .story-title,
+.closure-slide .story-paragraph,
+.closure-slide .inactivity-timer-container {
+  margin-bottom: 48px !important;
+}
+
+/* =========================================================
+   RESET & CONFIGURATION BASE
+   ========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html {
+  background-color: var(--color-bg);
+  height: 100%;
+  height: 100dvh;
+  touch-action: none;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  position: relative;
+  touch-action: none;
+}
+
+/* =========================================================
+   LAYOUT : TABLETTE HORIZONTALE (MARGES DE 80PX)
+   ========================================================= */
+.tablet-viewport {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--color-bg);
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  touch-action: none;
+}
+
+.tablet-viewport.fade-out {
+  opacity: 0;
+}
+
+.tablet-viewport.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.slides-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: transform var(--transition-speed) var(--transition-curve);
+  transform: translateX(calc(-100% * var(--active-slide, 0)));
+}
+
+.slides-wrapper.no-transition {
+  transition: none !important;
+}
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  /* Force l'isolation du contexte d'empilement pour mix-blend-mode */
+}
+
+.slide-content {
+  width: 100%;
+  height: 100%;
+  padding: var(--slide-padding-y) var(--slide-padding-x);
+  /* Marges réactives dynamiques */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: auto;
+  /* Permet aux enfants d'accéder au contexte d'empilement global pour mix-blend-mode */
+}
+
+.grid-two-columns {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   TYPOGRAPHIE & CONTENUS
+   ========================================================= */
+.home-title,
+.intro-vazco-slide .story-title,
+.menu-title,
+.closure-slide .story-title {
+  font-size: clamp(32px, 6vh, 56px) !important;
+  line-height: 1.1;
+  font-family: var(--font-title);
+  color: var(--color-text);
+  margin-bottom: clamp(1rem, 3vh, 2rem);
+  font-weight: normal;
+}
+
+.menu-title {
+  text-align: center;
+}
+
+.story-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 4vh, 2.6rem);
+  font-weight: normal;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: clamp(0.8rem, 2.5vh, 1.5rem);
+}
+
+.story-paragraph {
+  font-family: var(--font-body);
+  font-size: 28px !important;
+  line-height: 1.5;
+  color: var(--color-text);
+  margin-bottom: clamp(0.8rem, 2vh, 1.5rem);
+  font-weight: 400;
+  font-style: italic;
+  white-space: pre-line;
+}
+
+.story-paragraph strong,
+.speech-bubble p strong {
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* =========================================================
+   BOUTONS & CARACTÉRISTIQUES INTERACTIVES
+   ========================================================= */
+.btn-action-primary {
+  background-color: var(--color-btn);
+  color: #F0EAE5;
+  border: none;
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.2vh, 1.4rem);
+  font-weight: 500;
+  padding: clamp(0.7rem, 1.5vh, 0.9rem) clamp(1.8rem, 3vw, 2.2rem);
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(82, 73, 62, 0.2);
+  text-transform: none;
+}
+
+.btn-action-primary:hover {
+  background-color: var(--color-btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(82, 73, 62, 0.3);
+}
+
+.btn-action-primary:active {
+  transform: translateY(0);
+}
+
+.btn-arrow-img {
+  width: clamp(24px, 4vh, 37px);
+  height: clamp(24px, 4vh, 37px);
+  display: inline-block;
+  filter: brightness(0) invert(1);
+  /* Inverser en blanc pour fond sombre */
+  transition: transform 0.3s ease;
+}
+
+.btn-action-primary:hover .btn-arrow-img {
+  transform: translateX(5px);
+}
+
+/* Boutons Retour capsule blanche (Marges réactives) */
+.btn-back {
+  position: absolute;
+  top: var(--slide-padding-y);
+  left: var(--slide-padding-x);
+  /* Aligné avec la marge dynamique */
+  z-index: 100;
+  background-color: #FFFFFF;
+  color: var(--color-text);
+  border: none;
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.2vh, 1.4rem);
+  font-weight: 500;
+  padding: clamp(0.5rem, 1.2vh, 0.65rem) clamp(1.2rem, 2.5vw, 1.6rem);
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(82, 73, 62, 0.1);
+  transition: all 0.25s ease;
+  text-transform: none;
+}
+
+.btn-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(82, 73, 62, 0.15);
+}
+
+/* Bouton Retour marron capsule transparente */
+.btn-back-brown {
+  background-color: transparent !important;
+  color: var(--color-text) !important;
+  border: 2px solid var(--color-text) !important;
+  box-shadow: none !important;
+  font-size: clamp(1.1rem, 2.2vh, 1.4rem) !important;
+  padding: clamp(0.5rem, 1.2vh, 0.65rem) clamp(1.2rem, 2.5vw, 1.6rem) !important;
+}
+
+.btn-back-brown:hover {
+  background-color: var(--color-text) !important;
+  color: var(--color-bg) !important;
+  transform: translateY(-2px);
+}
+
+.btn-back-brown:hover .back-arrow-img {
+  filter: brightness(0) invert(1);
+}
+
+.back-arrow-img {
+  width: clamp(24px, 4vh, 37px);
+  height: clamp(24px, 4vh, 37px);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.btn-back:hover .back-arrow-img {
+  transform: translateX(-3px);
+}
+
+/* Boutons de navigation ronds SVG (Marges réactives des bords) */
+.nav-arrow-btn-round {
+  position: absolute;
+  right: var(--slide-padding-x);
+  /* Calé dynamiquement du bord */
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(45px, 8vh, 69px);
+  height: clamp(45px, 8vh, 69px);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-arrow-btn-round.prev-arrow {
+  left: var(--slide-padding-x);
+  /* Calé dynamiquement du bord */
+  right: auto;
+}
+
+.nav-arrow-btn-round:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.06);
+}
+
+.nav-arrow-btn-round:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.nav-arrow-btn-round:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-arrow-btn-round img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Conteneur de dots (Marge de 20px du bas) */
+.dots-container-bottom {
+  position: absolute;
+  bottom: clamp(10px, 2.5vh, 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+  align-items: center;
+}
+
+.dot-bottom {
+  width: clamp(12px, 2vh, 16px);
+  height: clamp(12px, 2vh, 16px);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.dot-bottom:hover {
+  transform: scale(1.2);
+}
+
+/* =========================================================
+   MASCOTTES & FLOATING ANIMATION
+   ========================================================= */
+.central-mascot-container,
+.visual-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.mascot-group-img {
+  max-width: 90%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.big-mascot {
+  max-width: 100%;
+  width: clamp(200px, 35vw, 420px);
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+.meta-mascot,
+.menu-mascot {
+  max-width: 85%;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+.float-animation {
+  animation: floatMascot 6s ease-in-out infinite;
+}
+
+@keyframes floatMascot {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(0.5deg);
+  }
+}
+
+/* =========================================================
+   CARROUSEL D'INTRODUCTION (PLEIN ÉCRAN)
+   ========================================================= */
+.slide-intro-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.slide-intro-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(82, 73, 62, 0.1);
+  z-index: auto;
+  /* Évite de créer un contexte d'empilement isolé */
+}
+
+.narrative-card {
+  position: relative;
+  z-index: 10;
+  background-color: var(--color-card-bg);
+  /* Opacité 90% via variable */
+  padding: clamp(1.5rem, 3.5vh, 3rem) clamp(2rem, 4vw, 3.5rem);
+  border-radius: 30px;
+  box-shadow: 0 12px 40px rgba(82, 73, 62, 0.15);
+  max-width: min(820px, calc(100vw - 320px));
+  /* Sécurisation flèches de navigation */
+  width: 90%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: auto;
+  text-align: left;
+}
+
+.carousel-nav-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* =========================================================
+   ÉCRAN TRANSITION FLAQUE (SLIDE 7)
+   ========================================================= */
+#slide-7 .story-paragraph {
+  font-size: 28px !important;
+  line-height: 1.45;
+}
+
+#slide-7 .metier-mascot {
+  width: clamp(250px, 35vw, 450px) !important;
+  min-width: 0 !important;
+  max-height: 85vh !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Forcer la réactivité de la bulle sur le slide 7 (Flaque) malgré le style inline */
+.meta-vazco-slide .speech-bubble {
+  max-width: 720px !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  flex: 1;
+}
+
+/* =========================================================
+   ÉCRAN MENU MÉTIERS (BOUTONS RÉACTIFS ET AJUSTÉS)
+   ========================================================= */
+.menu-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.menu-grid-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  width: 100%;
+  margin-top: clamp(0.5rem, 2vh, 1.5rem);
+  max-height: 58vh;
+  /* Hauteur max contrainte */
+}
+
+.menu-column {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vh, 1.5rem);
+}
+
+.left-menu-col {
+  align-items: flex-end;
+}
+
+.right-menu-col {
+  align-items: flex-start;
+}
+
+.menu-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-mascot {
+  max-width: 100%;
+  max-height: clamp(30vh, 40vh, 320px);
+}
+
+.btn-metier {
+  width: clamp(220px, 25vw, 310px);
+  height: clamp(60px, 9vh, 80px);
+  border-radius: clamp(30px, 5vh, 50px);
+  border: 2px solid var(--color-text);
+  background-color: transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 28px !important;
+  font-weight: 500;
+  padding: 0 clamp(1rem, 2vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(82, 73, 62, 0.05);
+  text-transform: none;
+}
+
+
+.btn-metier:hover {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(82, 73, 62, 0.15);
+}
+
+.btn-metier-play-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.btn-metier:hover .btn-metier-play-icon {
+  transform: translateX(4px);
+}
+
+
+
+/* =========================================================
+   ÉCRANS DES MÉTIERS INDIVIDUELS (DESSIN AU BAS ET CENTRE)
+   ========================================================= */
+.metier-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+  width: 100%;
+}
+
+.slide[data-bg] {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slide[data-bg]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(82, 73, 62, 0.1);
+  z-index: auto;
+  /* Évite de créer un contexte d'empilement isolé */
+}
+
+/* Boutons capsule de retour blanc avec opacité de 75% */
+.btn-back-to-menu {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Indicateur sonore cliquable (cercle avec bordure de couleur d'état) */
+.sound-indicator {
+  position: absolute;
+  top: var(--slide-padding-y);
+  right: var(--slide-padding-x);
+  z-index: 100;
+  width: clamp(45px, 8vh, 64px);
+  height: clamp(45px, 8vh, 64px);
+  border-radius: 50%;
+  background-color: rgba(149, 69, 69, 0.75);
+  /* Fond rouge 75% */
+  border: 2px solid #954545;
+  /* Bordure rouge */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(82, 73, 62, 0.1);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.2s ease, transform 0.2s ease;
+  user-select: none;
+}
+
+.sound-indicator.active {
+  border-color: #628163;
+  /* Bordure verte */
+  background-color: rgba(98, 129, 99, 0.75);
+  /* Fond vert 75% */
+}
+
+.sound-indicator:hover {
+  background-color: rgba(149, 69, 69, 0.9);
+  /* Fond rouge survol */
+  transform: translateY(-1px);
+}
+
+.sound-indicator.active:hover {
+  background-color: rgba(98, 129, 99, 0.9);
+  /* Fond vert survol */
+}
+
+.sound-indicator:active {
+  transform: translateY(1px);
+}
+
+.sound-indicator-icon {
+  width: clamp(24px, 4.5vh, 37px);
+  height: clamp(24px, 4.5vh, 37px);
+  display: inline-block;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  /* Rendre l'icône blanche pour un contraste optimal */
+}
+
+/* Positionnement pour les écrans métiers */
+.metier-dialog-container {
+  display: flex;
+  align-items: center;
+  /* Alignement centré de mascotte + bulle */
+  justify-content: center;
+  gap: clamp(1.5rem, 3.5vw, 3.5rem);
+  z-index: auto;
+  /* Permet aux enfants de se mélanger (mix-blend-mode) avec l'arrière-plan du slide */
+  position: absolute;
+  width: calc(100% - 300px);
+  /* Laisse 150px de marge à gauche/droite pour flèches */
+  max-width: 1200px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(60px, 10vh, 90px);
+}
+
+/* Positionnement absolute spécifique à l'écran de transition flaque (slide 7) */
+.meta-vazco-slide .metier-dialog-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 320px);
+}
+
+.metier-mascot {
+  width: clamp(240px, 22vw, 280px);
+  height: clamp(240px, 50vh, 380px);
+  max-height: 65vh;
+  object-fit: cover;
+  object-position: center;
+  z-index: 5;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.speech-bubble {
+  position: relative;
+  background-color: #FFFFFF;
+  border-radius: 30px;
+  padding: clamp(1rem, 2.5vh, 1.6rem) clamp(1.2rem, 2.5vw, 1.8rem);
+  box-shadow: 0 12px 40px rgba(82, 73, 62, 0.15);
+  border: none;
+  max-width: 785px;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  flex-shrink: 1;
+  margin-bottom: 0;
+}
+
+/* Pointeur de dialogue centré verticalement */
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+  border-width: 15px 20px 15px 0;
+  border-style: solid;
+  border-color: transparent #FFFFFF transparent transparent;
+  display: block;
+  width: 0;
+}
+
+.speech-bubble p {
+  font-family: var(--font-body);
+  font-size: 28px !important;
+  line-height: 1.45;
+  color: var(--color-text);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Bulle de texte sans indicateur sonore (écrans métiers de manipulation / tip) en regular non-italique */
+.metier-tip-slide .speech-bubble p {
+  font-style: normal;
+}
+
+/* Positionnement du bouton de clôture en bas */
+.metier-tip-next-container {
+  position: absolute;
+  right: var(--slide-padding-x);
+  bottom: 20px;
+  z-index: 100;
+}
+
+/* =========================================================
+   OVERLAY D'INACTIVITÉ GÉNÉRALE (1m30s)
+   ========================================================= */
+.inactivity-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.inactivity-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.inactivity-card {
+  background-color: var(--color-bg);
+  padding: clamp(1.5rem, 4vh, 3rem) clamp(2rem, 4vw, 3.5rem);
+  border-radius: 30px;
+  box-shadow: 0 15px 50px rgba(82, 73, 62, 0.3);
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  border: 2px solid var(--color-text);
+  animation: scaleUp 0.3s var(--transition-curve);
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.inactivity-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 4vh, 2.6rem);
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+  font-weight: normal;
+}
+
+.inactivity-text {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2.5vh, 1.8rem);
+  line-height: 1.5;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.inactivity-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.inactivity-buttons .secondary-btn {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-text);
+  box-shadow: none;
+}
+
+.inactivity-buttons .secondary-btn:hover {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+}
+
+/* =========================================================
+   ÉCRAN DE CLÔTURE & CHRONO D'INACTIVITÉ (10S)
+   ========================================================= */
+.inactivity-timer-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: clamp(1rem, 3vh, 2rem) 0;
+}
+
+.timer-circle-wrapper {
+  position: relative;
+  width: clamp(50px, 8vh, 70px);
+  height: clamp(50px, 8vh, 70px);
+}
+
+.timer-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-bg-circle {
+  fill: none;
+  stroke: rgba(82, 73, 62, 0.1);
+  stroke-width: 3.5;
+}
+
+.timer-progress {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s linear;
+}
+
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-title);
+  font-size: clamp(1.2rem, 2.5vh, 1.6rem);
+  font-weight: normal;
+  color: var(--color-text);
+}
+
+.timer-label {
+  font-family: var(--font-title);
+  font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* =========================================================
+   ALERTE ROTATION PORTRAIT
+   ========================================================= */
+.orientation-warning {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  background-color: var(--color-bg);
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text);
+}
+
+.orientation-warning-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  animation: rotateTablet 2.5s ease-in-out infinite;
+}
+
+.orientation-warning-title {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes rotateTablet {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-90deg);
+  }
+}
+
+@media (orientation: portrait) {
+  .orientation-warning {
+    display: flex;
+  }
+
+  .tablet-viewport {
+    display: none;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

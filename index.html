@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Vazco - Exposition MHT</title>
+
+  <!-- PWA Manifest & Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#52493E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Vazco">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  <!-- Conteneur principal simulant la tablette horizontale (verrouillé en paysage) -->
+  <div class="tablet-viewport" id="app-viewport">
+
+    <!-- Enveloppe coulissante contenant tous les écrans côte à côte -->
+    <div class="slides-wrapper" id="slides-wrapper" style="--active-slide: 0;">
+
+      <!-- =========================================================
+           ÉCRAN ACCUEIL (EX-ÉCRAN 7) : PRÉSENTATION DE VAZCO
+           ========================================================= -->
+      <section class="slide intro-vazco-slide welcome-slide" id="slide-0">
+        <div class="sound-indicator"></div>
+        <div class="slide-content grid-two-columns">
+
+          <div class="text-column">
+            <h1 id="txt-vazco-intro-title" class="story-title">Bonjour à tous, moi c'est Vazco...</h1>
+            <p id="txt-vazco-intro-text" class="story-paragraph">Sous ma peau de rouille...</p>
+
+            <div class="action-container">
+              <button class="btn-action-primary" id="btn-vazco-next" data-target="1">
+                <span id="txt-vazco-intro-btn">Découvrir l'histoire de Vazco</span>
+                <img src="assets/icons/chevron_right.svg" class="btn-arrow-img" alt="Suivant">
+              </button>
+            </div>
+          </div>
+
+          <div class="visual-column central-mascot-container">
+            <!-- Image de tous les mascottes réunies (remplace simple.png) -->
+            <img src="assets/vazco/tous_les_vazco.png" class="mascot-group-img float-animation"
+              alt="Les mascottes Vazco réunis">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           ÉCRAN 1 : MÉTAMORPHOSE / TRANSITION VAZCO FLAQUE
+           ========================================================= -->
+      <section class="slide meta-vazco-slide" id="slide-1">
+        <div class="sound-indicator"></div>
+        <div class="slide-content">
+
+          <!-- Bouton Retour marron capsule transparente vers Accueil (Slide 0) -->
+          <button class="btn-back btn-back-brown" id="btn-back-vazco-meta" data-target="0">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour</span>
+          </button>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/mise_en_forme.webp" class="metier-mascot float-animation"
+              alt="Vazco Puddle">
+            <div class="speech-bubble">
+              <p id="txt-meta-p1" class="story-paragraph" style="margin-bottom: 1rem;">Regardez, c'est plus fort que moi
+                : dès que je pense...</p>
+              <p id="txt-meta-p2" class="story-paragraph" style="margin-bottom: 0;">Pour faire naître ces navires...</p>
+            </div>
+          </div>
+
+          <!-- Chevron droit rond amenant au menu métiers (Slide 2) -->
+          <button class="nav-arrow-btn-round next-arrow" data-target="2">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           ÉCRAN 2 : MENU DE SÉLECTION DES MÉTIERS
+           ========================================================= -->
+      <section class="slide menu-metiers-slide" id="slide-2">
+        <div class="slide-content">
+
+          <div class="menu-header">
+            <button class="btn-back" id="btn-back-meta">
+              <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+              <span id="txt-menu-back">Retour présentation Vazco</span>
+            </button>
+            <h2 id="txt-menu-title" class="menu-title">Choisi quelle histoire tu veux découvrir avec moi !</h2>
+          </div>
+
+          <div class="menu-grid-container">
+            <!-- Colonne gauche -->
+            <div class="menu-column left-menu-col">
+              <button class="btn-metier" data-metier="dessinateur">
+                <span class="btn-metier-text">Dessinateur</span>
+                <img src="assets/icons/play.svg" class="btn-metier-play-icon" alt="Lire">
+              </button>
+              <button class="btn-metier" data-metier="secretaire">
+                <span class="btn-metier-text">Secrétaire</span>
+                <img src="assets/icons/play.svg" class="btn-metier-play-icon" alt="Lire">
+              </button>
+            </div>
+
+            <!-- Mascotte centrale -->
+            <div class="menu-center">
+              <img src="assets/vazco/flaque.png" class="menu-mascot float-animation" alt="Vazco Puddle">
+            </div>
+
+            <!-- Colonne droite -->
+            <div class="menu-column right-menu-col">
+              <button class="btn-metier" data-metier="soudeur">
+                <span class="btn-metier-text">Soudeur</span>
+                <img src="assets/icons/play.svg" class="btn-metier-play-icon" alt="Lire">
+              </button>
+              <button class="btn-metier" data-metier="chaudronnier">
+                <span class="btn-metier-text">Chaudronnier</span>
+                <img src="assets/icons/play.svg" class="btn-metier-play-icon" alt="Lire">
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           ÉCRANS DÉDIÉS AUX MÉTIERS
+           ========================================================= -->
+
+      <!-- DESSINATEUR (Slides 3, 4, 5, 6) -->
+      <section class="slide metier-story-slide" id="slide-3" data-bg="dessinateur">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Dessinateur.webp" class="metier-mascot" alt="Vazco Dessinateur">
+            <div class="speech-bubble">
+              <p id="txt-story-dessinateur">Explications du Dessinateur...</p>
+            </div>
+          </div>
+
+          <!-- Curseur slider sous forme d'icônes SVG -->
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="3" alt="Slide 1 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="4" alt="Slide 2">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="5" alt="Slide 3">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="6" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="2" data-transition="fade">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="4">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-story-slide" id="slide-4" data-bg="dessinateur">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Dessinateur.webp" class="metier-mascot" alt="Vazco Dessinateur">
+            <div class="speech-bubble">
+              <p id="txt-story2-dessinateur">Suite des explications...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="3" alt="Slide 1">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="4" alt="Slide 2 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="5" alt="Slide 3">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="6" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="3">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="5">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-story-slide" id="slide-5" data-bg="dessinateur">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Dessinateur.webp" class="metier-mascot" alt="Vazco Dessinateur">
+            <div class="speech-bubble">
+              <p id="txt-story3-dessinateur">Suite des explications 3...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="3" alt="Slide 1">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="4" alt="Slide 2">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="5" alt="Slide 3 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="6" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="4">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="6">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-tip-slide" id="slide-6" data-bg="dessinateur">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Dessinateur.webp" class="metier-mascot" alt="Vazco Dessinateur">
+            <div class="speech-bubble">
+              <p id="txt-tip-dessinateur">Consigne de manipulation...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="3" alt="Slide 1">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="4" alt="Slide 2">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="5" alt="Slide 3">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="6" alt="Slide 4 active">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="5">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow metier-finish-btn-round" data-metier="dessinateur">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <!-- SECRÉTAIRE (Slides 7, 8, 9, 10) -->
+      <section class="slide metier-story-slide" id="slide-7" data-bg="secretaire">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Secretaire.webp" class="metier-mascot" alt="Vazco Secrétaire">
+            <div class="speech-bubble">
+              <p id="txt-story-secretaire">Explications de la Secrétaire...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="7" alt="Slide 1 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="8" alt="Slide 2">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="9" alt="Slide 3">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="10" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="2" data-transition="fade">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="8">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-story-slide" id="slide-8" data-bg="secretaire">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Secretaire.webp" class="metier-mascot" alt="Vazco Secrétaire">
+            <div class="speech-bubble">
+              <p id="txt-story2-secretaire">Suite des explications...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="7" alt="Slide 1">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="8" alt="Slide 2 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="9" alt="Slide 3">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="10" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="7">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="9">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-story-slide" id="slide-9" data-bg="secretaire">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Secretaire.webp" class="metier-mascot" alt="Vazco Secrétaire">
+            <div class="speech-bubble">
+              <p id="txt-story3-secretaire">Suite des explications 3...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="7" alt="Slide 1">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="8" alt="Slide 2">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="9" alt="Slide 3 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="10" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="8">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="10">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-tip-slide" id="slide-10" data-bg="secretaire">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Secretaire.webp" class="metier-mascot" alt="Vazco Secrétaire">
+            <div class="speech-bubble">
+              <p id="txt-tip-secretaire">Consigne de manipulation...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="7" alt="Slide 1">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="8" alt="Slide 2">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="9" alt="Slide 3">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="10" alt="Slide 4 active">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="9">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow metier-finish-btn-round" data-metier="secretaire">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <!-- SOUDEUR (Slides 11, 12, 13, 14) -->
+      <section class="slide metier-story-slide" id="slide-11" data-bg="soudeur">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Soudeur.webp" class="metier-mascot" alt="Vazco Soudeur">
+            <div class="speech-bubble">
+              <p id="txt-story-soudeur">Explications du Soudeur...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="11" alt="Slide 1 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="12" alt="Slide 2">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="13" alt="Slide 3">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="14" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="2" data-transition="fade">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="12">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-story-slide" id="slide-12" data-bg="soudeur">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Soudeur.webp" class="metier-mascot" alt="Vazco Soudeur">
+            <div class="speech-bubble">
+              <p id="txt-story2-soudeur">Suite des explications...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="11" alt="Slide 1">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="12" alt="Slide 2 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="13" alt="Slide 3">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="14" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="11">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="13">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-story-slide" id="slide-13" data-bg="soudeur">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Soudeur.webp" class="metier-mascot" alt="Vazco Soudeur">
+            <div class="speech-bubble">
+              <p id="txt-story3-soudeur">Suite des explications 3...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="11" alt="Slide 1">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="12" alt="Slide 2">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="13" alt="Slide 3 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="14" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="12">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="14">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-tip-slide" id="slide-14" data-bg="soudeur">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/Soudeur.webp" class="metier-mascot" alt="Vazco Soudeur">
+            <div class="speech-bubble">
+              <p id="txt-tip-soudeur">Consigne de manipulation...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="11" alt="Slide 1">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="12" alt="Slide 2">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="13" alt="Slide 3">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="14" alt="Slide 4 active">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="13">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow metier-finish-btn-round" data-metier="soudeur">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <!-- CHAUDRONNIER (Slides 15, 16, 17, 18) -->
+      <section class="slide metier-story-slide" id="slide-15" data-bg="chaudronnier">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/chaudronnier.webp" class="metier-mascot" alt="Vazco Chaudronnier">
+            <div class="speech-bubble">
+              <p id="txt-story-chaudronnier">Explications du Chaudronnier...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="15" alt="Slide 1 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="16" alt="Slide 2">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="17" alt="Slide 3">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="18" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="2" data-transition="fade">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="16">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-story-slide" id="slide-16" data-bg="chaudronnier">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/chaudronnier.webp" class="metier-mascot" alt="Vazco Chaudronnier">
+            <div class="speech-bubble">
+              <p id="txt-story2-chaudronnier">Suite des explications...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="15" alt="Slide 1">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="16" alt="Slide 2 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="17" alt="Slide 3">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="18" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="15">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="17">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-story-slide" id="slide-17" data-bg="chaudronnier">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="sound-indicator">
+            <span>Tendez l'oreille</span>
+            <img src="assets/icons/sound-high.svg" class="sound-indicator-icon" alt="Son">
+          </div>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/chaudronnier.webp" class="metier-mascot" alt="Vazco Chaudronnier">
+            <div class="speech-bubble">
+              <p id="txt-story3-chaudronnier">Suite des explications 3...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="15" alt="Slide 1">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="16" alt="Slide 2">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="17" alt="Slide 3 active">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="18" alt="Slide 4">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="16">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow" data-target="18">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <section class="slide metier-tip-slide" id="slide-18" data-bg="chaudronnier">
+        <div class="slide-content metier-layout">
+          <button class="btn-back btn-back-to-menu">
+            <img src="assets/icons/chevron_left.svg" class="back-arrow-img" alt="Retour">
+            <span>Retour menu métiers</span>
+          </button>
+
+          <div class="metier-dialog-container">
+            <img src="assets/Animations Vazco/chaudronnier.webp" class="metier-mascot" alt="Vazco Chaudronnier">
+            <div class="speech-bubble">
+              <p id="txt-tip-chaudronnier">Consigne de manipulation...</p>
+            </div>
+          </div>
+
+          <div class="dots-container-bottom">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="15" alt="Slide 1">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="16" alt="Slide 2">
+            <img src="assets/icons/slider_empty.svg" class="dot-bottom" data-target="17" alt="Slide 3">
+            <img src="assets/icons/slider_full.svg" class="dot-bottom active" data-target="18" alt="Slide 4 active">
+          </div>
+
+          <button class="nav-arrow-btn-round prev-arrow" data-target="17">
+            <img src="assets/icons/chevron_btn_left.svg" alt="Précédent">
+          </button>
+          <button class="nav-arrow-btn-round next-arrow metier-finish-btn-round" data-metier="chaudronnier">
+            <img src="assets/icons/chevron_btn_right.svg" alt="Suivant">
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           ÉCRAN CLÔTURE & CHRONO D'INACTIVITÉ (10S)
+           ========================================================= -->
+      <section class="slide closure-slide" id="slide-19">
+        <div class="slide-content grid-two-columns">
+
+          <div class="text-column">
+            <h1 id="txt-closure-title" class="story-title">Tu as découvert tous les métiers de Vazco !</h1>
+            <p id="txt-closure-subtitle" class="story-paragraph">Vole de tes propres ailes maintenant...</p>
+
+            <!-- Indicateur visuel du chronomètre d'inactivité (10 secondes) -->
+            <div class="inactivity-timer-container">
+              <div class="timer-circle-wrapper">
+                <svg class="timer-svg" viewBox="0 0 36 36">
+                  <path class="timer-bg-circle"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path id="timer-progress-bar" class="timer-progress" stroke-dasharray="100, 100"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+                <div class="timer-text" id="timer-countdown">10</div>
+              </div>
+              <span id="txt-timer-label" class="timer-label">Retour au début dans...</span>
+            </div>
+
+            <div class="action-container">
+              <button class="btn-action-primary" id="btn-restart">
+                <span>Recommencer l'aventure</span>
+                <img src="assets/icons/chevron_right.svg" class="btn-arrow-img" alt="Suivant">
+              </button>
+            </div>
+          </div>
+
+          <div class="visual-column">
+            <img src="assets/vazco/simple.png" class="big-mascot float-animation" alt="Vazco">
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Overlay d'inactivité générale (1m30s) avec fond opacité #000000 à 25% -->
+  <div id="inactivity-overlay" class="inactivity-overlay">
+    <div class="inactivity-card">
+      <h2 class="inactivity-title">Êtes-vous toujours là ?</h2>
+      <p class="inactivity-text">Sans réponse de votre part, l'application reviendra à l'accueil.</p>
+      <div class="inactivity-buttons">
+        <button class="btn-action-primary" id="btn-overlay-yes">Oui</button>
+        <button class="btn-action-primary secondary-btn" id="btn-overlay-no">Non (10s)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alerte de rotation pour tablette en mode portrait -->
+  <div class="orientation-warning">
+    <div class="orientation-warning-icon">📱</div>
+    <h2 class="orientation-warning-title">Veuillez tourner votre tablette</h2>
+    <p>Cette application s'utilise uniquement en mode paysage (horizontal).</p>
+  </div>
+
+  <!-- Script principal contenant la logique et les textes configurables -->
+  <script src="index.js"></script>
+</body>
+
+</html>
